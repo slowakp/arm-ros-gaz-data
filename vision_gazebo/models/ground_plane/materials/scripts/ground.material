@@ -1,0 +1,18 @@
+material ground_material
+{
+  technique
+  {
+    pass
+    {
+      ambient 1 1 1 1
+      diffuse 1 1 1 1
+      emissive 0.7 0.7 0.7 1
+
+      texture_unit
+      {
+        texture map.png
+        scale 1 1
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="vision_world">
+
+    <gravity>0 0 0</gravity>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://box_imu_cam</uri>
+    </include>
+
+  </world>
+</sdf>
