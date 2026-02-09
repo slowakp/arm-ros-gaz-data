@@ -54,7 +54,7 @@ vision_gazebo/
 ├── scripts/             # Optional motion control scripts
 ├── CMakeLists.txt
 └── README.md
-
+```
 This project is intended for controlled generation of visual–inertial data in a reproducible simulation environment.
 
 ## Build
