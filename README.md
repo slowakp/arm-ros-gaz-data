@@ -69,7 +69,7 @@ Set the Gazebo model path:
 
 ```bash
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:\
-$HOME/ros2_ws/src/<repository_name>/models
+$HOME/ros2_ws/src/vision_gazebo/models
 ```
 
 ---
@@ -77,7 +77,7 @@ $HOME/ros2_ws/src/<repository_name>/models
 ## Run
 
 ```bash
-ros2 launch <repository_name> <launch_file>.launch.py
+ros2 launch vision_gazebo vision_world.launch.py
 ```
 
 
