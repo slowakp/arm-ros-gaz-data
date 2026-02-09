@@ -35,6 +35,15 @@ ros2 run ros_gz_bridge parameter_bridge /lidar2@sensor_msgs/msg/LaserScan[igniti
 ```
 
 
+## Data Recording
+An example of 10s bag recording.
+```bash
+timeout 10s ros2 bag record   /clicked_point   /goal_pose   /initialpose   /laser_scan   /laser_scan2   /tf   /tf_static   /rosout
+```
+
+(Record only the topics relevant to the given repository.)
+
+
 ---
 
 ## 2. Gazebo Classic – IMU and Camera
@@ -94,7 +103,7 @@ ros2 launch vision_gazebo vision_world.launch.py
 ## Data Recording
 
 ```bash
-ros2 bag record /imu/data /camera/image_raw /scan
+ros2 bag record   /camera/image_raw   /imu/data   /tf   /tf_static   /cmd/cmd_vel   /clock
 ```
 
 (Record only the topics relevant to the given repository.)
