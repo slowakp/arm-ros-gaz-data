@@ -1,60 +1,61 @@
 # arm-ros-gaz-data
 This repository contains a ROS 2 + Gazebo Classic simulation environment for controlled generation of multi-sensor data from a mobile robotic platform. The project is designed primarily for research, experimentation, and education in mobile robot autonomy, perception, and sensor fusion.
 
-# ROS 2 Gazebo Sensor Simulation
+# ROS 2 Sensor Simulation Repositories
 
-This repository provides a minimal **ROS 2 + Gazebo Classic** simulation for a **single sensor setup**.
-Each repository focuses on **one sensor only** (either IMU + Camera **or** Laser Scanner) to keep
-experiments simple, reproducible, and easy to analyze.
-
-The project is intended for **education, research, and benchmarking** of perception and sensor data
-processing pipelines.
-
----
-
-## Scope
-
-Depending on the repository variant, the simulation includes **one of the following**:
-
-### IMU + Camera project
-- Inertial Measurement Unit (IMU) with configurable noise
-- Monocular RGB camera
-- Controlled planar motion to excite inertial measurements
-
-### Laser Scanner project
-- 2D laser scanner (LiDAR)
-- Static or controlled-motion platform
-- Deterministic range data generation
-
-Each sensor configuration is maintained as a **separate repository** by design.
-
----
-
+This work consists of **two independent ROS 2 simulation projects**, each focused on a different sensor setup and simulation environment.
 ## Technologies
 
 - ROS 2 Humble Hawksbill
-- Gazebo Classic 11
+- Gazebo Classic 11 / Gazebo Ignition
 - gazebo_ros plugins (native ROS 2 integration)
 - Python (motion control, utilities)
 - rosbag2 (optional data recording)
 
-This project **does not use Ignition Gazebo** and **does not require a ROS–Gazebo bridge**.
+---
+
+## 1. Ignition Gazebo – Laser Scanner
+
+- Simulation based on **Ignition Gazebo**
+- Uses the predefined world `visualize_lidar.sdf`
+- 2D laser scanner (LiDAR)
+- ROS 2 communication via **ROS–Ignition bridge**
+- Data exchange and control performed **exclusively from the command line**
+- Published data:
+  - laser scan / point cloud
+  - TF frames
+- Repository includes **three scripts** for basic LiDAR data analysis
+
+This project focuses on command-line interaction, data bridging, and offline analysis of laser data.
 
 ---
+
+## 2. Gazebo Classic – IMU and Camera
+
+- Simulation based on **Gazebo Classic**
+- Custom simulation world with:
+  - textured ground plane,
+  - a floating box equipped with **IMU and RGB camera**
+- Native ROS 2 integration via **gazebo_ros plugins** (no bridge)
+- Recorded data:
+  - camera images,
+  - IMU measurements,
+  - odometry
+- The repository contains the complete ROS 2 package **`vision_gazebo`**
+
 
 ## Repository Structure
 
 ```
-project_root/
+vision_gazebo/         
 ├── models/              # Sensor and platform models
 ├── worlds/              # Gazebo world files
 ├── launch/              # ROS 2 launch files
 ├── scripts/             # Optional motion control scripts
 ├── CMakeLists.txt
 └── README.md
-```
 
----
+This project is intended for controlled generation of visual–inertial data in a reproducible simulation environment.
 
 ## Build
 
@@ -79,23 +80,9 @@ $HOME/ros2_ws/src/<repository_name>/models
 ros2 launch <repository_name> <launch_file>.launch.py
 ```
 
----
-
-## Example ROS 2 Topics
-
-### IMU + Camera project
-- /imu/data
-- /camera/image_raw
-- /camera/camera_info
-
-### Laser Scanner project
-- /scan
-
-### Simulation
-- /clock
-- /odom (if motion enabled)
 
 ---
+
 
 ## Data Recording
 
@@ -107,14 +94,10 @@ ros2 bag record /imu/data /camera/image_raw /scan
 
 ---
 
-## Design Notes
+## Notes
 
-- One sensor per repository for clarity and reproducibility
-- Gazebo Classic chosen for stability and mature ROS 2 support
-- Motion is optional and used mainly to excite sensors
-- Models are intentionally simple (no wheel dynamics)
-
----
+- The two projects are **intentionally separated** to avoid mixing Ignition and Gazebo Classic workflows.
+- Each repository is self-contained and can be used independently.
 
 ## License
 
